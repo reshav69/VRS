@@ -10,7 +10,7 @@ if (!isset($_SESSION["admin_logged_in"]) && $_SESSION["admin_logged_in"] !== tru
 //include navbar
 
 //variables
-$name =$model= $type = $mileage = $price = $vimage = "";
+$name =$model= $type = $mileage = $price = $vimage = $desc="";
 $name_err = $model_err = $type_err = $mileage_err = $price_err = $vimage_err = "";
 $errcnt = 0;
 
@@ -37,6 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $type = ($_POST["type"]);
     }
 
+    $desc=trim($_POST["desc"]);
+
     if (empty(trim($_POST["mileage"]))) {
         $mileage_err = "Please enter the mileage of the vehicle.";
         $errcnt++;
@@ -57,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $filetype = ['image/jpeg', 'image/png', 'image/webp'];
             if (in_array($_FILES['vimage']['type'], $filetype)) {
                 $filename = uniqid() . '_' . $_FILES['vimage']['name'];
-                $filepath = './vehicleImages/' . $filename;
+                $filepath = '../vehicleImages/' . $filename;
                 if (move_uploaded_file($_FILES['vimage']['tmp_name'], $filepath)) {
                     $vimage = $filename; // Store filename in $vimage variable
                 } else {
@@ -79,11 +81,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($errcnt==0) {
         include '../connection.php';
-        //insert data
+        $sql = "INSERT INTO Vehicles (name,model, category, mileage, price,description, image_filename) VALUES ( ?,?, ?, ?, ?, ?,?)";
+
+        if ($stmt = mysqli_prepare($conn, $sql)) {
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "sssssss", $param_name,$param_model, $param_category, $param_mileage, $param_price,$param_desc, $param_vimage);
+
+            // Set parameters
+            $param_name = $name;
+            $param_model = $model;
+            $param_category = $type;
+            $param_mileage = $mileage;
+            $param_price = $price;
+            $param_desc = $desc; 
+            $param_vimage = $vimage;
+
+            //execute the prepared statement
+            if (mysqli_stmt_execute($stmt)) {
+                echo "Added successfully";
+            } else {
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            mysqli_stmt_close($stmt);
+        }
     }
 
-
+    mysqli_close($conn);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -106,6 +132,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <div class="inp-grp">
+            <label for="desc">Vehicle desc: </label>
+            <textarea name="desc" value="<?php echo isset($desc) ? $desc : ''; ?>">
+            </textarea>
+        </div>
+
+        <div class="inp-grp">
             <label for="type">Vehicle Type: </label>
             <select name="type">
                 <option value="">--> Choose one <--</option>
@@ -124,7 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <div class="inp-grp">
             <label for="mileage">Mileage: </label>
-            <input type="number" name="mileage" value="<?php echo isset($mileage) ? $mileage : ''; ?>">
+            <input type="number" name="mileage" value="<?php echo isset($mileage) ? $mileage : '';?>">
             <span class="inp-err"><?php echo $mileage_err; ?></span>
         </div>
 
