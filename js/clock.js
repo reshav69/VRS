@@ -22,3 +22,4 @@ function currentTime() {
   document.getElementById("clock").innerText = time; 
   let t = setTimeout(function(){ currentTime() }, 1000);
 }
+currentTime();

@@ -5,6 +5,7 @@ function validate_data($data,$regex){
     } else {
         return false; // Validation failed
     }
+    return null;
 }
 
 ?>

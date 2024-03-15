@@ -1,6 +1,6 @@
 <?php 
 include "../functions/validate.php";
-include "../functions/check-availability.php";
+// include "../functions/check-availability.php";
 //variables
 $name =$username= $address = $contact = $email = $password = "";
 $name_err=$username_err = $address_err = $contact_err = $email_err = $password_err = "";
@@ -9,33 +9,33 @@ $errcnt=0;
 // validate andget data
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	//check empty fields
-
-	if (empty(trim($_POST["name"]))) {
+	$name=trim($_POST["name"]);
+	if (empty(($name))) {
         $name_err = "Please enter your name.";
         $errcnt++;
     } else {
-        $name = trim($_POST["name"]);
 	    //validating
-	    if (validate_data($name, /*regexfor name*/ ) == false) {
+	    if (validate_data($name, '/^[a-zA-Z\s]+$/' ) === false) {
 	    	$name_err="The name should not contain numbers or special characters";
 	    	$errcnt++;
 	    }
     }
 
     // Validate username
-    if (empty(trim($_POST["username"]))) {
-        $username_err = "Please enter your name.";
+    $username=trim($_POST["username"]);
+    if (empty($username)) {
+        $username_err = "Please enter your username.";
         $errcnt++;
     } else {
-        $username = trim($_POST["username"]);
-    	if (validate_data($username, /*regexfor username*/ ) == false) {
-	    	$name_err="Username invalid";
+    	if (validate_data($username, '/^[A-Za-z][A-Za-z0-9_]{4,29}$/' ) === false) {
+	    	$username_err="Username invalid";
 	    	$errcnt++;
 	    }
     }
 
     // Validate address
-    if (empty(trim($_POST["address"]))) {
+    $address=trim($_POST["address"]);
+    if (empty($address)) {
         $address_err = "Please enter your address.";
         $errcnt++;
     } else {
@@ -43,13 +43,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Validate contact
-    if (empty(trim($_POST["contact"]))) {
+    $contact=trim($_POST["contact"]);
+    if (empty($contact)) {
         $contact_err = "Please enter your contact number.";
         $errcnt++;
     } else {
-        $contact = trim($_POST["contact"]);
-        if (validate_data($username, /*regex for contact*/ ) == false) {
-	    	$contact_err="phone number invalids";
+
+        if (validate_data($contact, '/^9[0-9]{9}$/' ) == false) {
+	    	$contact_err="phone number invalid";
 	    	$errcnt++;
 	    }
     }
@@ -77,12 +78,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	//insert data
 	if ($errcnt == 0) {
+		include "../connection.php";
 		$sql = "INSERT INTO Users (name,username,password,address,contact,email) VALUES(?,?,?,?,?,?)";
 
 		//prepare statement
 		if ($stmt = mysqli_prepare($conn, $sql)) {
             // Bind variables
-            mysqli_stmt_bind_param($stmt, "ssssss", $param_name,$param_uname, $param_address, $param_contact, $param_email, $param_password);
+            mysqli_stmt_bind_param($stmt, "ssssss", $param_name,$param_uname, $param_password, $param_address, $param_contact, $param_email);
 
             $param_name = $name;
             $param_uname = $username;
@@ -95,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (mysqli_stmt_execute($stmt)) {
             	echo "User registered redirecting ...";
             	sleep(3);
-                header("location: user-login.php");
+                header("location: ./user-login.php");
             } else {
                 echo "Oops! Something went wrong. Please try again later.";
             }

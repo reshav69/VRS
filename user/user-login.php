@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 	<div class="form-container">
         <h2>Users Login</h2>
-        <form action="admin-login.php" method="post">
+        <form action="user-login.php" method="post">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" name="username" value="<?php echo $username; ?>">
