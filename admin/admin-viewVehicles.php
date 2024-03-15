@@ -64,7 +64,8 @@ $result = mysqli_query($conn, $sql);
                 <td><?php echo $row['price']; ?></td>
                 <td><?php echo $row['description']; ?></td>
                 <td><?php echo $row['availability'] ? 'Available' : 'Not Available'; ?></td>
-                <td><img src="../vehicleImages/<?php echo $row['image_filename']; ?>" alt="Vehicle Image" style="max-width: 100px;"></td>
+                <td><img src="..
+                	/vehicleImages/<?php echo $row['image_filename']; ?>" alt="Vehicle Image" style="max-width: 100px;"></td>
                 <td>
                     <!-- Edit button -->
                     <a href="admin-editVehicles.php?id=<?php echo $row['vehicle_id']; ?>">Edit</a>

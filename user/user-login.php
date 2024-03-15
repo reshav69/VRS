@@ -1,18 +1,21 @@
 <?php 
 session_start();
+//check session
 
 //check login status
-if (isset($_SESSION["admin_logged_in"]) && $_SESSION["admin_logged_in"] === true) {
-    header("location: admin-dashboard.php");
+if (isset($_SESSION["user_logged_in"]) && $_SESSION["user_logged_in"] === true) {
+    header("location: user-dashboard.php");
     exit();
 }
+//include navbar
 
-$username=$password=$username_err=$password_err='';
-$errcnt=0;
+//variables
+$username = $password = $password_err =$username_err = "";
 
+//check credentials
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-	//validate username password
+	//check emptys
 	if (empty(trim($_POST["username"]))) {
         $username_err = "Please enter your username.";
         $errcnt++;
@@ -27,12 +30,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = trim($_POST["password"]);
     }
 
-    //check if correct
-    if ($errcnt==0) {
+    if ($errcnt == 0) {
     	include '../connection.php';
-    	$sql = "SELECT admin_id, username, password FROM Admins WHERE username = ?";
+    	$sql = "SELECT user_id,username,password FROM Users WHERE username=?";
 
-        if ($stmt = mysqli_prepare($conn, $sql)) {
+    	if ($stmt = mysqli_prepare($conn, $sql)) {
             // Bind variables
             mysqli_stmt_bind_param($stmt, "s", $param_username);
             $param_username = $username;
@@ -44,17 +46,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 // Check if username exists
                 if (mysqli_stmt_num_rows($stmt) == 1) {
-                    mysqli_stmt_bind_result($stmt, $admin_id, $username, $hashed_password);
+                    mysqli_stmt_bind_result($stmt, $user_id, $username, $hashed_password);
                     //fetch
                     if (mysqli_stmt_fetch($stmt)) {
+                    	//verify hashed password
                         if (password_verify($password, $hashed_password)) {
 
                             // Store in session and send to dashboard
-                            $_SESSION["admin_logged_in"] = true;
-                            $_SESSION["admin_id"] = $admin_id;
-                            $_SESSION["ad-username"] = $username;
+                            $_SESSION["user_logged_in"] = true;
+                            $_SESSION["user_id"] = $user_id;
+                            $_SESSION["user-username"] = $username;
 
-                            header("location: admin-dashboard.php");
+                            header("location: user-dashboard.php");
                             exit();
                         } else {
                             $password_err = "The password you entered was not valid.";
@@ -70,54 +73,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_stmt_close($stmt);
         }
     }
-
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
-    <style>
-        .form-container {
-            width: 300px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-        .error {
-            color: red;
-            margin-top: 5px;
-        }
-    </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>User login</title>
 </head>
 <body>
-    <div class="form-container">
-        <h2>Admin Login</h2>
+	<div class="form-container">
+        <h2>Users Login</h2>
         <form action="admin-login.php" method="post">
-            <div class="form-group ">
+            <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" name="username" value="<?php echo $username; ?>">
                 <span class="error"><?php echo $username_err; ?></span>
             </div>
-            <div class="form-group ">
+            <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" name="password">
                 <span class="error"><?php echo $password_err; ?></span>
@@ -127,5 +101,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </form>
     </div>
+	
 </body>
 </html>

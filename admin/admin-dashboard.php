@@ -1,6 +1,11 @@
 <?php 
-	//check session
+session_start();
 
+//check login status
+if (!isset($_SESSION["admin_logged_in"]) && $_SESSION["admin_logged_in"] !== true) {
+	header("location: admin-login.php");
+	exit();
+}
 	//include navbar
 ?>
 <!DOCTYPE html>
@@ -13,12 +18,14 @@
 <body>
 
 	<div class="dateTime">
-		
+		<p id="clock" onload="currentTime()"></p>
 	</div>
 
 	<div class="adminInfo">
 		
 	</div>
-	
+	<br>
+	<a href="logout.php">logout</a>
+	<script type="text/javascript" src="../js/clock.js"></script>
 </body>
 </html>

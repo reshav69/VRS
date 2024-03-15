@@ -1,17 +1,15 @@
 <?php 
 function validate_data($data,$regex){
-	if(isset($_POST[$data]) && !empty(trim($_POST[$data]))){
-            if(preg_match($regex, $_POST[$data])){
-                return $_POST[$data];
-            } else {
-                $err[$data] = $errorMsg;
-            }
-        } else {
-            $err[$data] = "Enter $data";
-        }
-
+    if (preg_match($regex, $data)) {
+        return true; // Validation successful
+    } else {
+        return false; // Validation failed
+    }
 }
+
 ?>
+
+<!-- testing -->
 <?php
 if(isset($_POST['btnSubmit'])){
     $err = [];
