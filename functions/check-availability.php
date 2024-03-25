@@ -1,3 +1,4 @@
+<!-- testing -->
 <?php 
 require_once("../connection.php");
 // code user username availablity

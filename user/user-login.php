@@ -11,6 +11,7 @@ if (isset($_SESSION["user_logged_in"]) && $_SESSION["user_logged_in"] === true) 
 
 //variables
 $username = $password = $password_err =$username_err = "";
+$errcnt=0;
 
 //check credentials
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -81,23 +82,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>User login</title>
+    <link rel="stylesheet" type="text/css" href="../css/form.css">
 </head>
 <body>
 	<div class="form-container">
         <h2>Users Login</h2>
         <form action="user-login.php" method="post">
-            <div class="form-group">
+            <div class="inp-grp">
                 <label for="username">Username</label>
-                <input type="text" name="username" value="<?php echo $username; ?>">
                 <span class="error"><?php echo $username_err; ?></span>
+                <input type="text" name="username" value="<?php echo $username; ?>">
             </div>
-            <div class="form-group">
+            <div class="inp-grp">
                 <label for="password">Password</label>
-                <input type="password" name="password">
                 <span class="error"><?php echo $password_err; ?></span>
+                <input type="password" name="password">
             </div>
-            <div class="form-group">
-                <input type="submit" value="Login">
+            <div class="inp-grp">
+                <button type="submit" name="loginbtn" class="loginbtn">Login</button>
             </div>
         </form>
     </div>

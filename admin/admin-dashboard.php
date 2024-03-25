@@ -6,7 +6,8 @@ if (!isset($_SESSION["admin_logged_in"]) && $_SESSION["admin_logged_in"] !== tru
 	header("location: admin-login.php");
 	exit();
 }
-	//include navbar
+include 'admin-nav.php';
+$username = $_SESSION["ad-username"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,10 +23,10 @@ if (!isset($_SESSION["admin_logged_in"]) && $_SESSION["admin_logged_in"] !== tru
 	</div>
 
 	<div class="adminInfo">
-		
+		<p>Welcome <?php echo "$username"?></p>
 	</div>
 	<br>
-	<a href="logout.php">logout</a>
+	<a href="../functions/logout.php">logout</a>
 	<script type="text/javascript" src="../js/clock.js"></script>
 </body>
 </html>

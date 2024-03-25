@@ -6,7 +6,7 @@ $name =$username= $address = $contact = $email = $password = "";
 $name_err=$username_err = $address_err = $contact_err = $email_err = $password_err = "";
 $errcnt=0;
 
-// validate andget data
+// validate and get data
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	//check empty fields
 	$name=trim($_POST["name"]);
@@ -15,82 +15,82 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errcnt++;
     } else {
 	    //validating
-	    if (validate_data($name, '/^[a-zA-Z\s]+$/' ) === false) {
-	    	$name_err="The name should not contain numbers or special characters";
-	    	$errcnt++;
-	    }
-    }
+       if (validate_data($name, '/^[a-zA-Z\s]+$/' ) === false) {
+          $name_err="The name should not contain numbers or special characters";
+          $errcnt++;
+      }
+  }
 
     // Validate username
-    $username=trim($_POST["username"]);
-    if (empty($username)) {
-        $username_err = "Please enter your username.";
-        $errcnt++;
-    } else {
-    	if (validate_data($username, '/^[A-Za-z][A-Za-z0-9_]{4,29}$/' ) === false) {
-	    	$username_err="Username invalid";
-	    	$errcnt++;
-	    }
-    }
+  $username=trim($_POST["username"]);
+  if (empty($username)) {
+    $username_err = "Please enter your username.";
+    $errcnt++;
+} else {
+   if (validate_data($username, '/^[A-Za-z][A-Za-z0-9]{4,29}$/' ) === false) {
+      $username_err="Username invalid";
+      $errcnt++;
+  }
+}
 
     // Validate address
-    $address=trim($_POST["address"]);
-    if (empty($address)) {
-        $address_err = "Please enter your address.";
-        $errcnt++;
-    } else {
-        $address = trim($_POST["address"]);
-    }
+$address=trim($_POST["address"]);
+if (empty($address)) {
+    $address_err = "Please enter your address.";
+    $errcnt++;
+} else {
+    $address = trim($_POST["address"]);
+}
 
     // Validate contact
-    $contact=trim($_POST["contact"]);
-    if (empty($contact)) {
-        $contact_err = "Please enter your contact number.";
-        $errcnt++;
-    } else {
+$contact=trim($_POST["contact"]);
+if (empty($contact)) {
+    $contact_err = "Please enter your contact number.";
+    $errcnt++;
+} else {
 
-        if (validate_data($contact, '/^9[0-9]{9}$/' ) == false) {
-	    	$contact_err="phone number invalid";
-	    	$errcnt++;
-	    }
-    }
+    if (validate_data($contact, '/^9[0-9]{9}$/' ) == false) {
+      $contact_err="phone number invalid";
+      $errcnt++;
+  }
+}
 
     //validate email
-    $email = $_POST["email"];
-	if (empty(trim($email))) {
-	    $email_err = "Please enter your email address.";
-	    $errcnt++;
-	} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-	    $email_err = "Invalid email format.";
-	    $errcnt++;
-	}
+$email = $_POST["email"];
+if (empty(trim($email))) {
+   $email_err = "Please enter your email address.";
+   $errcnt++;
+} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+   $email_err = "Invalid email format.";
+   $errcnt++;
+}
 
 	// Validate password
-    if (empty(trim($_POST["password"]))) {
-        $password_err = "Please enter a password.";
-        $errcnt++;
-    } elseif (strlen(trim($_POST["password"])) < 6) {
-        $password_err = "Password must have at least 6 characters.";
-    } else {
-        $password = trim($_POST["password"]);
-    }
+if (empty(trim($_POST["password"]))) {
+    $password_err = "Please enter a password.";
+    $errcnt++;
+} elseif (strlen(trim($_POST["password"])) < 6) {
+    $password_err = "Password must have at least 6 characters.";
+} else {
+    $password = trim($_POST["password"]);
+}
 
 
 	//insert data
-	if ($errcnt == 0) {
-		include "../connection.php";
-		$sql = "INSERT INTO Users (name,username,password,address,contact,email) VALUES(?,?,?,?,?,?)";
+if ($errcnt == 0) {
+  include "../connection.php";
+  $sql = "INSERT INTO Users (name,username,password,address,contact,email) VALUES(?,?,?,?,?,?)";
 
 		//prepare statement
-		if ($stmt = mysqli_prepare($conn, $sql)) {
+  if ($stmt = mysqli_prepare($conn, $sql)) {
             // Bind variables
-            mysqli_stmt_bind_param($stmt, "ssssss", $param_name,$param_uname, $param_password, $param_address, $param_contact, $param_email);
+    mysqli_stmt_bind_param($stmt, "ssssss", $param_name,$param_uname, $param_password, $param_address, $param_contact, $param_email);
 
-            $param_name = $name;
-            $param_uname = $username;
-            $param_address = $address;
-            $param_contact = $contact;
-            $param_email = $email;
+    $param_name = $name;
+    $param_uname = $username;
+    $param_address = $address;
+    $param_contact = $contact;
+    $param_email = $email;
             $param_password = password_hash($password, PASSWORD_DEFAULT);//hash password
 
             // execute
@@ -104,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             mysqli_stmt_close($stmt);
         }
-	}
+    }
 }
 
 
@@ -115,44 +115,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration</title>
+    <link rel="stylesheet" type="text/css" href="../css/form.css">
 </head>
 <body>
-    <h2>User Registration</h2>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" name="name" value="<?php echo $name; ?>">
-            <span><?php echo $name_err; ?></span>
-        </div>
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" name="username" value="<?php echo $username; ?>">
-            <span><?php echo $username_err; ?></span>
-        </div>
-        <div class="form-group">
-            <label for="address">Address</label>
-            <input type="text" name="address" value="<?php echo $address; ?>">
-            <span><?php echo $address_err; ?></span>
-        </div>
-        <div class="form-group">
-            <label for="contact">Contact</label>
-            <input type="text" name="contact" value="<?php echo $contact; ?>">
-            <span><?php echo $contact_err; ?></span>
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" name="email" value="<?php echo $email; ?>">
-            <span><?php echo $email_err; ?></span>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" name="password">
-            <span><?php echo $password_err; ?></span>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Register">
-        </div>
-        <p>Already have an account? <a href="user-login.php">Login here</a>.</p>
-    </form>
+    
+    <div class="form-container">
+        <h2 align="center">User Registration</h2><hr>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="inp-grp">
+                <label for="name">Name</label>
+                <span class="error"><?php echo $name_err; ?></span>
+                <input type="text" name="name" value="<?php echo $name; ?>">
+            </div>
+            <div class="inp-grp">
+                <label for="username">Username</label>
+                <span class="error"><?php echo $username_err; ?></span>
+                <input type="text" name="username" value="<?php echo $username; ?>">
+            </div>
+            <div class="inp-grp">
+                <label for="address">Address</label>
+                <span class="error"><?php echo $address_err; ?></span>
+                <input type="text" name="address" value="<?php echo $address; ?>">
+            </div>
+            <div class="inp-grp">
+                <label for="contact">Contact</label>
+                <span class="error"><?php echo $contact_err; ?></span>
+                <input type="text" name="contact" value="<?php echo $contact; ?>">
+            </div>
+            <div class="inp-grp">
+                <label for="email">Email</label>
+                <span class="error"><?php echo $email_err; ?></span>
+                <input type="email" name="email" value="<?php echo $email; ?>">
+            </div>
+            <div class="inp-grp">
+                <label for="password">Password</label>
+                <span class="error"><?php echo $password_err; ?></span>
+                <input type="password" name="password">
+            </div>
+            <div class="inp-grp">
+                <button name="submit" class="registerbtn">Register </button>
+            </div>
+            <p>Already have an account? <a href="user-login.php">Login here</a>.</p>
+        </form>
+    </div>
 </body>
 </html>

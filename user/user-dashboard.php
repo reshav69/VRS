@@ -6,6 +6,7 @@ if (!isset($_SESSION["user_logged_in"]) && $_SESSION["user_logged_in"] !== true)
 	header("location: user-login.php");
 	exit();
 }
+
 	//include navbar
 ?>
 <!DOCTYPE html>
@@ -20,13 +21,15 @@ if (!isset($_SESSION["user_logged_in"]) && $_SESSION["user_logged_in"] !== true)
 	<div class="dateTime">
 		<p id="clock" onload="currentTime()"></p>
 		<?php echo $_SESSION['user-username']; ?>
+		<?php echo $_SESSION['user_id']; ?>
+
 	</div>
 
 	<div class="userInfo">
 		
 	</div>
 	<br>
-	<a href="logout.php">logout</a>
+	<a href="../functions/logout.php">logout</a>
 	<script type="text/javascript" src="../js/clock.js"></script>
 </body>
 </html>

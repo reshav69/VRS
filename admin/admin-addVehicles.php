@@ -7,7 +7,7 @@ if (!isset($_SESSION["admin_logged_in"]) && $_SESSION["admin_logged_in"] !== tru
     header("location: admin-login.php");
     exit();
 }
-//include navbar
+include 'admin-nav.php';
 
 //variables
 $name =$model= $type = $mileage = $price = $vimage = $desc="";
@@ -116,60 +116,63 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 <head>
     <title>Add vehicle</title>
+    <link rel="stylesheet" type="text/css" href="../css/form.css">
 </head>
 <body>
-    <form action="admin-addVehicles.php" method="post" enctype="multipart/form-data">
-        <div class="inp-grp">
-            <label for="name">Vehicle Name: </label>
-            <input type="text" name="name" value="<?php echo isset($name) ? $name : ''; ?>">
-            <span class="inp-err"><?php echo $name_err; ?></span>
-        </div>
+    <div class="form-container">
+        <form action="admin-addVehicles.php" method="post" enctype="multipart/form-data">
+            <div class="inp-grp">
+                <label for="name">Vehicle Name: </label>
+                <input type="text" name="name" value="<?php echo isset($name) ? $name : ''; ?>">
+                <span class="inp-err"><?php echo $name_err; ?></span>
+            </div>
 
-        <div class="inp-grp">
-            <label for="model">Vehicle model: </label>
-            <input type="text" name="model" value="<?php echo isset($model) ? $model : ''; ?>">
-            <span class="inp-err"><?php echo $model_err; ?></span>
-        </div>
+            <div class="inp-grp">
+                <label for="model">Vehicle model: </label>
+                <input type="text" name="model" value="<?php echo isset($model) ? $model : ''; ?>">
+                <span class="inp-err"><?php echo $model_err; ?></span>
+            </div>
 
-        <div class="inp-grp">
-            <label for="desc">Vehicle desc: </label>
-            <textarea name="desc" value="<?php echo isset($desc) ? $desc : ''; ?>">
-            </textarea>
-        </div>
+            <div class="inp-grp">
+                <label for="desc">Vehicle desc: </label>
+                <textarea name="desc" value="<?php echo isset($desc) ? $desc : ''; ?>">
+                </textarea>
+            </div>
 
-        <div class="inp-grp">
-            <label for="type">Vehicle Type: </label>
-            <select name="type">
-                <option value="">--> Choose one <--</option>
-                <option value="Bicycle" <?php echo isset($type) && $type == 'Bicycle' ? 'selected' : ''; ?>>Bicycle</option>
-                <option value="Car" <?php echo isset($type) && $type == 'Car' ? 'selected' : ''; ?>>Car</option>
-                <option value="Motorcycle" <?php echo isset($type) && $type == 'Motorcycle' ? 'selected' : ''; ?>>Motorcycle</option>
-            </select>
-            <span class="inp-err"><?php echo $type_err; ?></span>
-        </div>
+            <div class="inp-grp">
+                <label for="type">Vehicle Type: </label>
+                <select name="type">
+                    <option value="">--> Choose one <--</option>
+                    <option value="Bicycle" <?php echo isset($type) && $type == 'Bicycle' ? 'selected' : ''; ?>>Bicycle</option>
+                    <option value="Car" <?php echo isset($type) && $type == 'Car' ? 'selected' : ''; ?>>Car</option>
+                    <option value="Motorcycle" <?php echo isset($type) && $type == 'Motorcycle' ? 'selected' : ''; ?>>Motorcycle</option>
+                </select>
+                <span class="inp-err"><?php echo $type_err; ?></span>
+            </div>
 
-        <div class="inp-grp">
-            <label for="price">Price per day: </label>
-            <input type="number" name="price" value="<?php echo isset($price) ? $price : ''; ?>">
-            <span class="inp-err"><?php echo $price_err; ?></span>
-        </div>
+            <div class="inp-grp">
+                <label for="price">Price per day: </label>
+                <input type="number" name="price" value="<?php echo isset($price) ? $price : ''; ?>">
+                <span class="inp-err"><?php echo $price_err; ?></span>
+            </div>
 
-        <div class="inp-grp">
-            <label for="mileage">Mileage: </label>
-            <input type="number" name="mileage" value="<?php echo isset($mileage) ? $mileage : '';?>">
-            <span class="inp-err"><?php echo $mileage_err; ?></span>
-        </div>
+            <div class="inp-grp">
+                <label for="mileage">Mileage: </label>
+                <input type="number" name="mileage" value="<?php echo isset($mileage) ? $mileage : '';?>">
+                <span class="inp-err"><?php echo $mileage_err; ?></span>
+            </div>
 
-        <div class="inp-grp">
-            <label for="vimage">Upload image</label>
-            <input type="file" name="vimage" id="vimage" />
-            <span class="inp-err"><?php echo $vimage_err; ?></span>
-        </div>
+            <div class="inp-grp">
+                <label for="vimage">Upload image</label>
+                <input type="file" name="vimage" id="vimage" />
+                <span class="inp-err"><?php echo $vimage_err; ?></span>
+            </div>
 
-        <div class="inp-grp">
-            <input type="submit" name="btnAdd" value="Add">
-        </div>
-    </form>
+            <div class="inp-grp">
+                <input type="submit" name="btnAdd" value="Add">
+            </div>
+        </form>
+    </div>
 
 </body>
 </html>
