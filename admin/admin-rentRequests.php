@@ -37,6 +37,7 @@ mysqli_close($conn);
             <th>Vehicle</th>
             <th>Request Date</th>
             <th>Status</th>
+            <th>Actions</th>
         </tr>
         <?php while ($row = mysqli_fetch_assoc($result)) : ?>
             <tr>

@@ -3,10 +3,12 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-body {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+body{
   overflow-x: hidden;
+  padding-top:70px;
+}
+.navbar {
+
 }
 
 a {
@@ -18,19 +20,22 @@ li {
 }
 
 .navbar {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1%;
   background-color: teal;
-  color: #fff;
+  color: blanchedalmond;
   position: fixed;
   z-index: 999;
   width: 100%;
+  height: 60px;
+  top: 0;
 }
 
 .nav-links a {
-  color: #fff;
+  color: blanchedalmond;
 }
 
 .logo {
@@ -72,6 +77,9 @@ li {
   display: none;
   border-radius: 8px;
   top: 75%;
+  left:auto;
+  right: 1em;
+  text-align:right;
 }
 
 .dropdown li+li {
@@ -85,12 +93,19 @@ li {
 }
 
 .dropdown li:hover {
+
   background-color: #4c9e9e;
 }
 
 .categories:hover .dropdown {
   display: block;
 }
+.categories a{
+  color: ghostwhite;
+  font-style: italic;
+
+}
+
 
 input[type=checkbox] {
   display: none;

@@ -1,12 +1,10 @@
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
 
 * {
     box-sizing: border-box;
 }
 
 .form-container {
+  font-family: Arial, Helvetica, sans-serif;
   width: 40%;
   margin: auto;
 
@@ -42,7 +40,7 @@ hr {
 
 /* Set a style for the submit button */
 .registerbtn ,.loginbtn{
-  background-color: #04AA6D;
+  background-color: rgb(1, 139, 139);
   color: white;
   padding: 16px 20px;
   margin: 8px 0;

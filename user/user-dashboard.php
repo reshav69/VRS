@@ -6,8 +6,6 @@ if (!isset($_SESSION["user_logged_in"]) && $_SESSION["user_logged_in"] !== true)
 	header("location: user-login.php");
 	exit();
 }
-
-	//include navbar
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +15,7 @@ if (!isset($_SESSION["user_logged_in"]) && $_SESSION["user_logged_in"] !== true)
 	<title>user Dashboard</title>
 </head>
 <body>
-
+	<?php include 'user-nav.php';?>
 	<div class="dateTime">
 		<p id="clock" onload="currentTime()"></p>
 		<?php echo $_SESSION['user-username']; ?>

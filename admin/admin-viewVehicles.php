@@ -42,6 +42,7 @@ $result = mysqli_query($conn, $sql);
     </style>
 </head>
 <body>
+    <?php include 'admin-nav.php'?>
     <h2>View Vehicles</h2>
     <table>
         <tr>

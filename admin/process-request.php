@@ -50,4 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Close connection
 mysqli_close($conn);
+echo "OK!!! ";
+
+echo "<a href=\"javascript:history.go(-1)\">GO BACK</a>";
 ?>
+
