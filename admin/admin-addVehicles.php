@@ -7,7 +7,6 @@ if (!isset($_SESSION["admin_logged_in"]) && $_SESSION["admin_logged_in"] !== tru
     header("location: admin-login.php");
     exit();
 }
-include 'admin-nav.php';
 
 //variables
 $name =$model= $type = $mileage = $price = $vimage = $desc="";
@@ -119,6 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" type="text/css" href="../css/form.css">
 </head>
 <body>
+    <?php include 'admin-nav.php'; ?>
     <div class="form-container">
         <form action="admin-addVehicles.php" method="post" enctype="multipart/form-data">
             <div class="inp-grp">

@@ -23,7 +23,7 @@
                 <ul class="dropdown">
                     <li><a href="#">Edit Profile? </a></li>
                     <li><a href="user-rented.php">My vehicles</a></li>
-                    <li><a href="#">Dropdown 2</a></li>
+                    <li><a href="user-viewVehicles.php">Find Vehicles</a></li>
                     <li><a href="#">Dropdown 3</a></li>
                     <hr>
                     <li><a href="../functions/logout.php">logout</a></li>

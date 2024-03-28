@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errcnt++;
 } else {
    if (validate_data($username, '/^[A-Za-z][A-Za-z0-9]{4,29}$/' ) === false) {
-      $username_err="Username invalid";
+      $username_err="Username invalid must be like 'test', 'test12'";
       $errcnt++;
   }
 }
@@ -66,7 +66,7 @@ if (empty(trim($email))) {
 }
 
 	// Validate password
-if (empty(trim($_POST["password"]))) {
+if (empty(trim($_POST["password"]))) {false
     $password_err = "Please enter a password.";
     $errcnt++;
 } elseif (strlen(trim($_POST["password"])) < 6) {
@@ -145,7 +145,7 @@ if ($errcnt == 0) {
             <div class="inp-grp">
                 <label for="email">Email</label>
                 <span class="error"><?php echo $email_err; ?></span>
-                <input type="email" name="email" value="<?php echo $email; ?>">
+                <input type="text" name="email" value="<?php echo $email; ?>">
             </div>
             <div class="inp-grp">
                 <label for="password">Password</label>
@@ -160,3 +160,4 @@ if ($errcnt == 0) {
     </div>
 </body>
 </html>
+<

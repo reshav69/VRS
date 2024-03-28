@@ -22,6 +22,8 @@ $result = mysqli_query($conn, $sql);
 // Close connection
 mysqli_close($conn);
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -47,10 +49,7 @@ mysqli_close($conn);
 				<td><?php echo $row['request_date']; ?></td>
 				<td><?php echo $row['status']; ?></td>
 				<td>
-                    <form action="user-rented.php" method="post">
-                        <button type="submit" name="Cancel">Cancel this request</button>
-
-                    </form>
+                    <a href="user-cancel.php?id=<?php echo $row['vehicle_id']; ?>" onclick="return confirm('Are you sure you want to cancel this request?');">Cancel</a>
                 </td>
 			</tr>
 		<?php endwhile; ?>

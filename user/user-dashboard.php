@@ -18,12 +18,12 @@ if (!isset($_SESSION["user_logged_in"]) && $_SESSION["user_logged_in"] !== true)
 	<?php include 'user-nav.php';?>
 	<div class="dateTime">
 		<p id="clock" onload="currentTime()"></p>
-		<?php echo $_SESSION['user-username']; ?>
-		<?php echo $_SESSION['user_id']; ?>
 
 	</div>
 
 	<div class="userInfo">
+		<p>Hello <b><?php echo $_SESSION['user-username']; ?></b></p>
+		<p>Your id is <?php echo $_SESSION['user_id']; ?></p>
 		
 	</div>
 	<br>

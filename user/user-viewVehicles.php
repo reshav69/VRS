@@ -39,6 +39,7 @@ mysqli_close($conn);
     </style>
 </head>
 <body>
+    <?php include 'user-nav.php';?>
     <h2>View Vehicles</h2>
     <table>
         <tr>

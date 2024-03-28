@@ -70,7 +70,7 @@ $result = mysqli_query($conn, $sql);
                     <!-- Edit button -->
                     <a href="admin-editVehicles.php?id=<?php echo $row['vehicle_id']; ?>">Edit</a>
                     <!-- Delete button -->
-                    <a href="admin-deleteVehicles.php?id=<?php echo $row['vehicle_id']; ?>" onclick="return confirm('Are you sure you want to delete this vehicle?');">Delete</a>
+                    <a href="admin-deleteVehicle.php?id=<?php echo $row['vehicle_id']; ?>" onclick="return confirm('Are you sure you want to delete this vehicle?');">Delete</a>
                 </td>
             </tr>
         <?php endwhile; ?>
