@@ -38,6 +38,9 @@ li {
 .logo {
   font-size: 2rem;
 }
+.logo a{
+  text-decoration: none;
+}
 
 .menu {
   display: flex;

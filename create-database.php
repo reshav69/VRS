@@ -64,9 +64,10 @@ CREATE TABLE IF NOT EXISTS Rent (
     vehicle_id INT,
     request_date DATE,
     status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
-    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),#cascade on delete
     FOREIGN KEY (vehicle_id) REFERENCES Vehicles(vehicle_id)
 );
+#add new contacts table
 ";
 
 // Execute
@@ -77,4 +78,10 @@ if ($conn->multi_query($sql) === TRUE) {
 }
 
 $conn->close();
+// create trigger in database
+// if rent.status =approved
+// vehicle.availability  = 0 
+
+//else
+//vehicle.availability = 1
 ?>

@@ -39,6 +39,7 @@ else{
     <title><?php echo $vehicle_data['model']; ?></title>
 </head>
 <body>
+    <?php include 'admin-nav.php'; ?>
     <h2><?php echo $vehicle_data['name']; ?></h2>
     <p>Id: <?php echo $vehicle_data['vehicle_id']; ?></p>
     <p>Model: <?php echo $vehicle_data['model']; ?></p>

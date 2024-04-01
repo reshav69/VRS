@@ -15,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Update approved status
         $sql = "UPDATE Rent SET status = 'approved' WHERE request_id = ?";
+        $usql = "UPDATE Vehcle SET availability = 0 WHERE request_id= '$request_id'";
         if ($stmt = mysqli_prepare($conn, $sql)) {
             mysqli_stmt_bind_param($stmt, "i", $request_id);
             if (mysqli_stmt_execute($stmt)) {
@@ -26,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "Oops! Something went wrong. Please try again later.";
         }
+
     }
 
     // check reject
@@ -54,4 +56,3 @@ echo "OK!!! ";
 
 echo "<a href=\"javascript:history.go(-1)\">GO BACK</a>";
 ?>
-

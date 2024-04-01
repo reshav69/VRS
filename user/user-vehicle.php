@@ -9,7 +9,7 @@ if (!isset($_SESSION["user_logged_in"]) && $_SESSION["user_logged_in"] !== true)
 include '../connection.php';
 
 //variables
-$vehicle_data=$name=$user_id=$requestDate=$status="";
+$vehicle_data=$name=$user_id=$requestDate=$status=$availability="";
 
 //get url info
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
@@ -30,6 +30,7 @@ else{
         echo "The requested vehicle was not found";
         // header("location: error.php");
     }
+    // $availability = $result['availability'];
 }
 
 //rent
@@ -60,7 +61,7 @@ if (isset($_POST['btnRent'])) {
         }else{
             echo "Oops!!! something went wrong";//put in $rentmessage
         }
-    mysqli_stmt_close($stmt);
+        mysqli_stmt_close($stmt);
     }
 }
 
@@ -73,19 +74,30 @@ if (isset($_POST['btnRent'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $vehicle_data['model']; ?></title>
+    <link rel="stylesheet" href="../css/details.css">
 </head>
 <body>
+    <?php include 'user-nav.php'; ?>
+    <div class="detail-container">
+        <div class="detail-left">
     <h2><?php echo $vehicle_data['name']; ?></h2>
+            <p>Model: <?php echo $vehicle_data['model']; ?></p>
+            <p>Category: <?php echo $vehicle_data['category']; ?></p>
+            <p>Mileage: <?php echo $vehicle_data['mileage']; ?>km per litre</p>
+            <p>Price: <?php echo $vehicle_data['price'] ?></p>
+            <p> <?php echo $vehicle_data['description']; ?></p>
+            <p>Availability: <?php echo $vehicle_data['availability'] ? 'Available' : 'Not Available'; ?></p>
+        </div>
+        <div class="detail-right">
+            <img src="../vehicleImages/<?php echo $vehicle_data['image_filename']; ?>" alt="Vehicle Image" style="width: 500px;">
+            
+            <form action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]); ?>" method="post">
+                
+                <button name="btnRent" class="btn-rent" <?php if(!$vehicle_data['availability']) echo 'disabled'; ?>>Rent</button>
+            </form>
+        </div>
+    </div>
 
-    <p>Model: <?php echo $vehicle_data['model']; ?></p>
-    <p>Category: <?php echo $vehicle_data['category']; ?></p>
-    <p>Mileage: <?php echo $vehicle_data['mileage']; ?>km per litre</p>
-    <p>Price: <?php echo $vehicle_data['price'] ?></p>
-    <p> <?php echo $vehicle_data['description']; ?></p>
-    <p>Availability: <?php echo $vehicle_data['availability'] ? 'Available' : 'Not Available'; ?></p>
-    <img src="../vehicleImages/<?php echo $vehicle_data['image_filename']; ?>" alt="Vehicle Image" style="width: 500px;">
-    <form action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]); ?>" method="post">
-        <button name="btnRent" class="btn-rent">Rent</button>
-    </form>
+
 </body>
 </html>

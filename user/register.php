@@ -66,7 +66,7 @@ if (empty(trim($email))) {
 }
 
 	// Validate password
-if (empty(trim($_POST["password"]))) {false
+if (empty(trim($_POST["password"]))) {
     $password_err = "Please enter a password.";
     $errcnt++;
 } elseif (strlen(trim($_POST["password"])) < 6) {
