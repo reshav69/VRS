@@ -24,26 +24,13 @@ $result = mysqli_query($conn, $sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Vehicles</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
+    <link rel="stylesheet" href="../css/tables.css">
 
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
 </head>
 <body>
     <?php include 'admin-nav.php'?>
     <h2>View Vehicles</h2>
+    <div class="tab-veh">
     <table>
         <tr>
             <th>Name</th>
@@ -63,7 +50,7 @@ $result = mysqli_query($conn, $sql);
                 <td><?php echo $row['category']; ?></td>
                 <td><?php echo $row['mileage']; ?></td>
                 <td><?php echo $row['price']; ?></td>
-                <td><?php echo $row['description']; ?></td>
+                <td><div><?php echo $row['description']; ?></div></td>
                 <td><?php echo $row['availability'] ? 'Available' : 'Not Available'; ?></td>
                 <td><img src="../vehicleImages/<?php echo $row['image_filename']; ?>" alt="Vehicle Image" style="max-width: 100px;"></td>
                 <td>
@@ -75,5 +62,6 @@ $result = mysqli_query($conn, $sql);
             </tr>
         <?php endwhile; ?>
     </table>
+    </div>
 </body>
 </html>

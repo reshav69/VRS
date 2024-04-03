@@ -8,14 +8,15 @@ if (!isset($_SESSION["admin_logged_in"]) && $_SESSION["admin_logged_in"] !== tru
 }
 
 include '../connection.php';
-
+$fin=false;
 
 //get all data from database
-$sql = "SELECT Rent.request_id,Rent.vehicle_id, Users.username,Users.contact, Vehicles.name, Rent.request_date, Rent.status
-        FROM Rent
-        INNER JOIN Users ON Rent.user_id = Users.user_id
-        INNER JOIN Vehicles ON Rent.vehicle_id = Vehicles.vehicle_id";
+$sql = "SELECT *
+FROM Rent
+INNER JOIN Users ON Rent.user_id = Users.user_id
+INNER JOIN Vehicles ON Rent.vehicle_id = Vehicles.vehicle_id";
 $result = mysqli_query($conn, $sql);
+
 
 // Close connection
 mysqli_close($conn);
@@ -27,10 +28,11 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Requests</title>
+    <link rel="stylesheet" href="../css/tables.css">
 </head>
 <body>
     <?php include 'admin-nav.php';?>
-    <h2>Admin Requests</h2>
+    <h2>Rent Requests</h2>
     <table border="1">
         <tr>
             <th>Request ID</th>
@@ -39,9 +41,14 @@ mysqli_close($conn);
             <th>Request Date</th>
             <th>Status</th>
             <th>Contact</th>
+            <th>Rent Date</th>
+            <th>Renting for</th>
             <th>Actions</th>
         </tr>
         <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+            <?php if ($row['status'] == "finished") {
+                $fin=true;
+            } ?>
             <tr>
                 <td><?php echo $row['request_id']; ?></td>
                 <td><?php echo $row['username']; ?></td>
@@ -50,15 +57,18 @@ mysqli_close($conn);
                 <td><?php echo $row['request_date']; ?></td>
                 <td><?php echo $row['status']; ?></td>
                 <td><?php echo $row['contact']; ?></td>
+                <td><?php echo $row['rent_date']; ?></td>
+                <td><?php echo $row['rent_days']; ?> Days</td>
                 <td>
-                    <form action="process-request.php" method="post">
-                        <input type="hidden" name="request_id" value="<?php echo $row['request_id']; ?>">
-                        <button type="submit" name="approve">Approve</button>
-                        <button type="submit" name="reject">Reject</button>
-                    </form>
-                </td>
-            </tr>
-        <?php endwhile; ?>
-    </table>
+                <form action="process-request.php" method="post">
+                    <input type="hidden" name="request_id" value="<?php echo $row['request_id']; ?>">
+                    <button type="submit" name="approve" <?php if ($row['status'] == "finished") echo "disabled";?>>Approve</button>
+                    <button type="submit" name="reject" <?php if ($row['status'] == "finished") echo "disabled";?>>Reject</button>
+                    <button type="submit" name="finish">Complete Rent</button>
+                </form>
+            </td>
+        </tr>
+    <?php endwhile; ?>
+</table>
 </body>
 </html>

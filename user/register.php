@@ -116,9 +116,10 @@ if ($errcnt == 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration</title>
     <link rel="stylesheet" type="text/css" href="../css/form.css">
+
 </head>
 <body>
-    
+    <?php include 'user-nav.php'; ?>
     <div class="form-container">
         <h2 align="center">User Registration</h2><hr>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -160,4 +161,3 @@ if ($errcnt == 0) {
     </div>
 </body>
 </html>
-<

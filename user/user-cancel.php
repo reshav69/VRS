@@ -27,6 +27,7 @@ else{
     $result = mysqli_query($conn,$sql);
     if (($result) ) {
         echo "the request was cancelled";
+        header('location: user-dashboard.php');
     }else{
         echo "The requested vehicle was not found";
         // header("location: error.php");

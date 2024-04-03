@@ -1,3 +1,4 @@
+
 .container {
     position: relative;
     background: url(../images/vechicles-arial-shot.jpg)no-repeat;
@@ -80,8 +81,9 @@
 
 
 footer {
-    position: relative;
+    position: static;
     bottom: 0;
+    margin: auto;
     background: #111;
     height: auto;
     width: 100vw;
@@ -105,10 +107,10 @@ footer {
 
 .footer-content p {
     max-width: 500px;
-    margin: 10px auto;
     line-height: 1rem;
     font-size: 14px;
     color: #cacdd2;
+    margin-top: auto;
 }
 
 .footer-content-left {

@@ -13,20 +13,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['approve'])) {
         $request_id = $_POST['request_id'];
 
-        // Update approved status
-        $sql = "UPDATE Rent SET status = 'approved' WHERE request_id = ?";
-        $usql = "UPDATE Vehcle SET availability = 0 WHERE request_id= '$request_id'";
-        if ($stmt = mysqli_prepare($conn, $sql)) {
-            mysqli_stmt_bind_param($stmt, "i", $request_id);
-            if (mysqli_stmt_execute($stmt)) {
-                echo "Rent request approved successfully.";
-            } else {
-                echo "Error approving rent request.";
-            }
-            mysqli_stmt_close($stmt);
+        // Update approved status and availability
+        $sql = "UPDATE Rent SET status = 'approved' WHERE request_id = '$request_id';
+        UPDATE Vehicles SET availability = 0 WHERE vehicle_id = (
+            SELECT vehicle_id 
+            FROM Rent 
+            WHERE request_id = '$request_id'
+        )";
+
+        if (mysqli_multi_query($conn, $sql)) {
+            echo "Rent request approved successfully.";
         } else {
-            echo "Oops! Something went wrong. Please try again later.";
+            echo "Error approving rent request: " . mysqli_error($conn);
         }
+
 
     }
 
@@ -47,6 +47,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "Oops! Something went wrong. Please try again later.";
         }
+    }
+
+    if (isset($_POST['finish'])) {
+        $request_id = $_POST['request_id'];
+        $fsql = "UPDATE Rent SET status='finished' WHERE request_id = '$request_id';
+        UPDATE Vehicles SET availability = 1 WHERE vehicle_id = (
+            SELECT vehicle_id 
+            FROM Rent 
+            WHERE request_id = '$request_id'
+        )";
+
+        if (mysqli_multi_query($conn, $fsql)) {
+            echo "The rent is now completed";
+        } else {
+            echo "Error approving rent request: ";
+        }
+        
     }
 }
 

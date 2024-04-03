@@ -85,6 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" type="text/css" href="../css/form.css">
 </head>
 <body>
+    <?php include 'user-nav.php';?>
 	<div class="form-container">
         <h2>Users Login</h2>
         <form action="user-login.php" method="post">

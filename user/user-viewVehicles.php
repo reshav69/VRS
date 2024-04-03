@@ -21,46 +21,39 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Vehicles</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/tables.css">
+    <link rel="stylesheet" href="../css/view.css">
 </head>
 <body>
     <?php include 'user-nav.php';?>
-    <h2>View Vehicles</h2>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Mileage</th>
-            <th>Price</th>
-            <th>Availability</th>
-            <th>Image</th>
-        </tr>
-        <?php while ($row = mysqli_fetch_assoc($result)) : ?>
-            <tr>
-                <td><a href="user-vehicle.php?id=<?php echo $row['vehicle_id']; ?>"><?php echo $row['name']; ?></a></td>
-                <td><?php echo $row['category']; ?></td>
-                <td><?php echo $row['mileage']; ?></td>
-                <td><?php echo $row['price']; ?></td>
-                <td><?php echo $row['availability'] ? 'Available' : 'Not Available'; ?></td>
-                <td><img src="../vehicleImages/<?php echo $row['image_filename']; ?>" alt="Vehicle Image" style="max-width: 100px;"></td>
+    <h2>Find Vehicles</h2>
+    <p>You can search for vehicles <a href="search.php">here</a></p>
+    <div class="vehicles">
+        <?php while ($vehicle = mysqli_fetch_assoc($result)) : ?>
+            <div class="vehicle-container">
+                <div class="box">
+                    <div class="img-container">
+                        <img src="../vehicleImages/<?php echo $vehicle['image_filename']?>" alt="vehicleimage">
+                    </div>
+                    <div class="model-info">
+                        <li>model:<?php echo $vehicle['model']; ?> </li>
+                        <li>mileage: <?php echo $vehicle["mileage"]; ?></li>
+                        <li><?php echo $vehicle["category"]; ?></li>
+                        <li><?php echo $vehicle['availability'] ? 'Available' : 'Not Available'; ?></li>
+                    </div>
+                </div>
 
-            </tr>
+                <div class="vehicle-description">
+                    <h2><a href="user-vehicle.php?id=<?php echo $vehicle['vehicle_id']; ?>"><?php echo $vehicle['name']; ?></a></h2>
+                    <h3>Rs. <?php echo $vehicle['price']; ?> per day</h3>
+                    <p>
+                        <?php echo $vehicle['description']; ?>
+                    </p>
+                </div>
+            </div>
+
         <?php endwhile; ?>
-    </table>
+    </div>
+    <?php include 'footer.php' ?>
 </body>
 </html>

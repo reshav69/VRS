@@ -1,13 +1,15 @@
-
 * {
     box-sizing: border-box;
 }
-
+body{
+  background-color: #b1d3ab;
+}
 .form-container {
   font-family: Arial, Helvetica, sans-serif;
   width: 40%;
-  margin: auto;
-
+  margin:0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
   padding: 50px;
   border-radius: 20px;
   /* background-color: white; */
@@ -26,7 +28,16 @@
   border: none;
   background: #f1f1f1;
 }
-
+/*dropdown*/
+.inp-grp select{
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 20px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+  text-align: center;
+} 
 .inp-grp input:focus {
   background-color: #ddd;
   outline: none;
@@ -39,7 +50,7 @@ hr {
 }
 
 /* Set a style for the submit button */
-.registerbtn ,.loginbtn{
+.registerbtn ,.loginbtn,.rentbtn{
   background-color: rgb(1, 139, 139);
   color: white;
   padding: 16px 20px;
@@ -50,16 +61,18 @@ hr {
   opacity: 0.9;
 }
 
-.registerbtn:hover,.loginbtn:hover {
+.registerbtn:hover,.loginbtn:hover,.rentbtn {
   opacity: 1;
 }
-
+.rentbtn:disabled{
+    background-color:gray;
+    cursor: not-allowed;
+}
 
 a {
   color: dodgerblue;
 }
-.error{
-
+.error,.inp-err{
   color: red;
 }
 
