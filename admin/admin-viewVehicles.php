@@ -55,9 +55,9 @@ $result = mysqli_query($conn, $sql);
                 <td><img src="../vehicleImages/<?php echo $row['image_filename']; ?>" alt="Vehicle Image" style="max-width: 100px;"></td>
                 <td>
                     <!-- Edit button -->
-                    <a href="admin-editVehicles.php?id=<?php echo $row['vehicle_id']; ?>">Edit</a>
+                    <a class="green" href="admin-editVehicles.php?id=<?php echo $row['vehicle_id']; ?>">Edit</a>
                     <!-- Delete button -->
-                    <a href="admin-deleteVehicle.php?id=<?php echo $row['vehicle_id']; ?>" onclick="return confirm('Are you sure you want to delete this vehicle?');">Delete</a>
+                    <a class="red" href="admin-deleteVehicle.php?id=<?php echo $row['vehicle_id']; ?>" onclick="return confirm('Are you sure you want to delete this vehicle?');">Delete</a>
                 </td>
             </tr>
         <?php endwhile; ?>

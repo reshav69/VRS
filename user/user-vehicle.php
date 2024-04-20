@@ -10,7 +10,7 @@ include '../connection.php';
 include '../functions/validate.php';
 
 //variables
-$vehicle_data=$name=$user_id=$requestDate=$status=$availability=$rentDate=$rentDays=$rentmsg=$rentloc=$errDate = $errDay = $errLoc=$total="";
+$vehicle_data=$name=$user_id=$requestDate=$status=$availability=$rentDate=$rentDays=$rentmsg=$rentloc=$errDate = $errDay = $errLoc=$total=$msg="";
 $errcnt=0;
 
 //get url info
@@ -61,7 +61,7 @@ if (isset($_POST['btnRent'])) {
 
     $rentloc=trim($_POST['rentloc']);
     if (empty($rentloc)) {
-        $errDay = "Enter the pickup location";
+        $errLoc = "Enter the pickup location";
         $errcnt++;
     } else {
         if (validate_data($rentloc, '/^[a-zA-Z0-9]+$/' ) == false) {
@@ -88,7 +88,7 @@ if (isset($_POST['btnRent'])) {
             //bind variables
             mysqli_stmt_bind_param($stmt, "iisssss", $user_id, $vehicleId, $requestDate, $status,$rentDate,$rentDays,$rentloc);
             if (mysqli_stmt_execute($stmt)) {
-                echo "Rent request submitted successfully. your total is: $total";
+                $msg= "Rent request submitted successfully. your total is: $total";
             } else {
                 $rentmsg= "Error submitting rent request.";
             }
@@ -126,6 +126,8 @@ if (isset($_POST['btnRent'])) {
         </div>
         <div class="detail-right">
             <span class="error"><?php echo $rentmsg; ?></span>
+            <span class="msg"><?php echo $msg; ?></span>
+
             <img src="../vehicleImages/<?php echo $vehicle_data['image_filename']; ?>" alt="Vehicle Image" style="width: 500px;">
             
             <form action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]); ?>" method="post">

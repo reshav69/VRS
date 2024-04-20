@@ -4,7 +4,7 @@ include '../connection.php';
 
 $vehicles = [];
 
-$sql = "SELECT * FROM Vehicles ORDER BY RAND() LIMIT 8";
+$sql = "SELECT * FROM Vehicles ORDER BY RAND() LIMIT 4";
 $result = mysqli_query($conn, $sql);
 
 
@@ -29,7 +29,6 @@ mysqli_close($conn);
     <link rel="stylesheet" href="../css/navbar.css" />
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/view.css">
-    <script src="https://kit.fontawesome.com/fdc1bae177.js" crossorigin="anonymous"></script>
     <title>VRS</title>
 </head>
 
@@ -37,12 +36,16 @@ mysqli_close($conn);
     <?php include 'user-nav.php'?>
     <div class="container">
         <div class="welcome-txt">
-            <h2>get your desired vehicle in resonable price</h2>
+            <h2>rent your desired vehicle in resonable price</h2>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
                 etdolore magna aliqua.
             </p>
-            <button class="welcome-btn">View Vehicles</button>
+            <?php if (isset($_SESSION["user_logged_in"]) && $_SESSION["user_logged_in"] === true) : ?>
+            <button class="buttons">View Vehicles</button>
+            <?php else : ?>
+                <button class="buttons">Register Now</button>
+            <?php endif; ?>
         </div>
     </div>
 

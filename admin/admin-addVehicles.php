@@ -7,7 +7,7 @@ if (!isset($_SESSION["admin_logged_in"]) && $_SESSION["admin_logged_in"] !== tru
     header("location: admin-login.php");
     exit();
 }
-
+$aid = $_SESSION['ad-username'];
 //variables
 $name =$model= $type = $mileage = $price = $vimage = $desc="";
 $name_err = $model_err = $type_err = $mileage_err = $price_err = $vimage_err = "";
@@ -80,11 +80,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($errcnt==0) {
         include '../connection.php';
-        $sql = "INSERT INTO Vehicles (name,model, category, mileage, price,description, image_filename) VALUES ( ?,?, ?, ?, ?, ?,?)";
+        $sql = "INSERT INTO Vehicles (name,model, category, mileage, price,description, image_filename,aid) VALUES ( ?,?, ?, ?, ?, ?,?,?)";
 
         if ($stmt = mysqli_prepare($conn, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sssssss", $param_name,$param_model, $param_category, $param_mileage, $param_price,$param_desc, $param_vimage);
+            mysqli_stmt_bind_param($stmt, "sssssssi", $param_name,$param_model, $param_category, $param_mileage, $param_price,$param_desc, $param_vimage,$param_id);
 
             // Set parameters
             $param_name = $name;
@@ -94,6 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $param_price = $price;
             $param_desc = $desc; 
             $param_vimage = $vimage;
+            $param_id = $aid;
 
             //execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {

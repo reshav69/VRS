@@ -13,7 +13,7 @@
         <div class="menu">
 
             <li><a href="home.php">Home</a></li>
-            <li><a href="#">About</a></li>
+            <!-- <li><a href="#">About</a></li> -->
 
 
             <li><a href="user-viewVehicles.php">Find Vehicles</a></li>

@@ -9,6 +9,7 @@ if (!isset($_SESSION["user_logged_in"]) && $_SESSION["user_logged_in"] !== true)
 
 // Include database connection
 include '../connection.php';
+include '../functions/validate.php';
 
 // Initialize variablesCar
 $name = $username = $address = $password = $contact = $email = '';
@@ -55,7 +56,7 @@ else{
 //update details
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //check empty fields
-    $newname=trim($_POST["name"]);
+    $newname=trim($_POST["newname"]);
     if (empty(($newname))) {
         $name_err = "Please enter your name.";
         $errcnt++;
@@ -68,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Validate username
-    $newusername=trim($_POST["username"]);
+    $newusername=trim($_POST["newusername"]);
     if (empty($newusername)) {
         $username_err = "Please enter your username.";
         $errcnt++;
@@ -80,16 +81,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
         // Validate address
-    $newaddress=trim($_POST["address"]);
+    $newaddress=trim($_POST["newaddress"]);
     if (empty($newaddress)) {
         $address_err = "Please enter your address.";
         $errcnt++;
     } else {
-        $newaddress = trim($_POST["address"]);
+        $newaddress = trim($_POST["newaddress"]);
     }
 
             // Validate contact
-    $newcontact=trim($_POST["contact"]);
+    $newcontact=trim($_POST["newcontact"]);
     if (empty($newcontact)) {
         $contact_err = "Please enter your contact number.";
         $errcnt++;
@@ -101,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
             //validate email
-    $newemail = $_POST["email"];
+    $newemail = $_POST["newemail"];
     if (empty(trim($newemail))) {
      $email_err = "Please enter your email address.";
      $errcnt++;
@@ -111,17 +112,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
             // Validate password
-    if (empty(trim($_POST["password"]))) {
+    if (empty(trim($_POST["newpassword"]))) {
         $password_err = "Please enter a password.";
         $errcnt++;
-    } elseif (strlen(trim($_POST["password"])) < 6) {
+    } elseif (strlen(trim($_POST["newpassword"])) < 6) {
         $password_err = "Password must have at least 6 characters.";
     } else {
-        $newpassword = trim($_POST["password"]);
+        $newpassword = trim($_POST["newpassword"]);
     }
 
     if ($errcnt==0) {
         //update query
+        $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
+         $sql = "UPDATE Users SET username = '$newusername', email = '$newemail', password = '$hashed_password', contact = '$newcontact', email = '$newemail', address = '$address' WHERE user_id = '$userid'";
+         if (mysqli_query($conn, $sql)) {
+            $message = 'Profile edited successfully';
+
+        } else {
+            echo "Oops! Something went wrong. Please try again later.";
+        }
     }
 }
 
@@ -136,15 +145,13 @@ mysqli_close($conn);
     <title>Edit User</title>
     <link rel="stylesheet" href="../css/form.css">
 
-    <style>
-
-    </style>
 </head>
 <body>
     <?php include 'user-nav.php' ?>
     <div class="form-container">
         <h2>Edit user</h2><hr>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" >
+            <span style="color: green"><?php echo "$message"; ?></span>
             <div class="inp-grp">
                 <label for="newname">Name: </label>
                 <input type="text" name="newname" value="<?php echo isset($name) ? $name : ''; ?>">

@@ -12,11 +12,13 @@ body{
 
 .vehicle-container {
     width: 46%;
+    padding: 7px;
     margin: auto;
+    margin-bottom: 20px;
     transition: transform 0.3s ease;
 }
 .vehicle-container:hover {
-    transform: scale(1.05); /* Increase the size a bit on hover */
+    transform: scale(1.05); 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -69,10 +71,9 @@ h3 {
 .vehicle-description p {
     color: grey;
     font-size: 0.7rem;
-    margin-bottom: 50px;
     padding: 10px 0;
     overflow:hidden;
-    max-height: 5rem;
+    height: 4rem;
 }
 
 @media (min-width: 768px) {
@@ -99,4 +100,18 @@ h3 {
     .vehicle-container p{
         font-size: 0.9rem;
     }
+}
+.buttons{
+  background-color: rgb(1, 139, 139);
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 200px;
+  opacity: 0.9;
+}
+
+.buttons:hover {
+  opacity: 1;
 }

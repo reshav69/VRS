@@ -121,11 +121,11 @@ mysqli_close($conn);
             </textarea>
         </div>
 
-        <div class="inp-grp">
+<!--         <div class="inp-grp">
             <label for="vimage">Upload image</label>
             <input type="file" name="vimage" id="vimage" />
             <span class="inp-err"><?php echo $vimage_err; ?></span>
-        </div>
+        </div> -->
 
 
         <div class="inp-grp">
@@ -139,7 +139,8 @@ mysqli_close($conn);
         </div>
         <div class="inp-grp">
             <button type="submit" class="loginbtn" name="update">Update</button>
-            <button class="loginbtn" href="admin-deleteVehicle.php?id=<?php echo $vehicleId; ?>" onclick="return confirm('Are you sure you want to delete this vehicle?');">Delete</button>
+
+            <!-- <a class="loginbtn" href="admin-deleteVehicle.php?id=<?php //echo $vehicleId; ?>" onclick="return confirm('Are you sure you want to delete this vehicle?');">Delete</a> -->
         </div>
     </form>
     </div>

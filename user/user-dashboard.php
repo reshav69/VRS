@@ -31,22 +31,24 @@ mysqli_close($conn);
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>User Vehicles</title>
 	<link rel="stylesheet" href="../css/tables.css">
+	<link rel="stylesheet" href="../css/user-dash.css">
 	<!-- <link rel="stylesheet" href="../css/view.css"> -->
 </head>
 <body>
 	<?php include "user-nav.php"; ?>
-	<div class="dateTime">
-		<p id="clock" onload="currentTime()"></p>
+	<div class="dash-container">
+			
+		<div class="dateTime">
+			<p id="clock" onload="currentTime()"></p>
 
-	</div>
+		</div>
 
-	<div class="userInfo">
-		<p>Hello <b><?php echo $_SESSION['user-username']; ?></b></p>
-		<p>Your id is <?php echo $_SESSION['user_id']; ?></p>
-		
+		<div class="info">
+			<p>Hello <b><?php echo $_SESSION['user-username']; ?></b></p>
+		</div>
 	</div>
-	<br>
-	<script type="text/javascript" src="../js/clock.js"></script>
+	<br><br>
+	
 	<h2>Here are the vehicles you have rented</h2>
 	<?php if (mysqli_num_rows($result) > 0) { ?>
 	<table border='1'>
@@ -68,7 +70,7 @@ mysqli_close($conn);
 				<td><?php echo $row['location']; ?></td>
 				<td><?php echo $row['status']; ?></td>
 				<td>
-                    <a href="user-cancel.php?id=<?php echo $row['vehicle_id']; ?>" onclick="return confirm('Are you sure you want to cancel this request?');">Cancel/Delete</a>
+                    <a class="red" href="user-cancel.php?id=<?php echo $row['vehicle_id']; ?>" onclick="return confirm('Are you sure you want to cancel this request?');"class="buttons">Cancel/Delete</a>
                 </td>
 			</tr>
 		<?php endwhile; ?>
@@ -78,6 +80,6 @@ mysqli_close($conn);
         // If there are no rented vehicles, display a message
         echo "<p>You haven't rented any vehicles yet.</p>";
     }?>
-
+    <script type="text/javascript" src="../js/clock.js"></script>
 </body>
 </html>
