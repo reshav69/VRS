@@ -107,9 +107,10 @@ if (isset($_POST['btnRent'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $vehicle_data['model']; ?></title>
+    <title><?php echo $vehicle_data['name']; ?></title>
     <link rel="stylesheet" href="../css/details.css">
     <link rel="stylesheet" href="../css/form.css">
+    <link rel="stylesheet" href="../css/general.css">
 </head>
 <body>
     <?php include 'user-nav.php'; ?>
@@ -120,8 +121,7 @@ if (isset($_POST['btnRent'])) {
             <p><b>Category:</b> <?php echo $vehicle_data['category']; ?></p>
             <p><b>Mileage:</b> <?php echo $vehicle_data['mileage']; ?> km per litre</p>
             <p><b>Price:</b> <?php echo $vehicle_data['price'] ?> per day</p>
-            <p><b>Availability:</b> <?php echo $vehicle_data['availability'] ? 'Available' : 'Not Available'; ?></p>
-            <br>
+            <p <?php echo $vehicle_data['availability'] ? 'class=av' : 'class=notav'; ?>><b><?php echo $vehicle_data['availability'] ? 'Available' : 'Not Available'; ?></b></p><br>
             <p> <?php echo $vehicle_data['description']; ?></p>
         </div>
         <div class="detail-right">

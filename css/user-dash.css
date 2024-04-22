@@ -1,10 +1,10 @@
 .dash-container{
 	float:left;
-	margin: 1% 7% 2% 2%;
-	width: 500px;
+	margin: 1% 5% 2% 2%;
+	width:20em;
 	height: 100px;
 	padding:20px;
-	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.28);
 	border-radius: 25px;
   	display: block;
   	background: lightgray;

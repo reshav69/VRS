@@ -36,28 +36,27 @@ else{
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $vehicle_data['model']; ?></title>
+    <title><?php echo $vehicle_data['name']; ?></title>
     <link rel="stylesheet" href="../css/details.css">
     <link rel="stylesheet" href="../css/form.css">
+    <link rel="stylesheet" href="../css/general.css">
 </head>
 <body>
     <?php include 'admin-nav.php'; ?>
     <div class="detail-container">
         <div class="detail-left">
             <h2><?php echo $vehicle_data['name']; ?></h2>
-            <p>Id: <?php echo $vehicle_data['vehicle_id']; ?></p>
-            <p>Model: <?php echo $vehicle_data['model']; ?></p>
-            <p>Category: <?php echo $vehicle_data['category']; ?></p>
-            <p>Mileage: <?php echo $vehicle_data['mileage']; ?>km per litre</p>
-            <p>Price: <?php echo $vehicle_data['price'] ?></p>
+            <p><b>Id: </b><?php echo $vehicle_data['vehicle_id']; ?></p>
+            <p><b>Model: </b><?php echo $vehicle_data['model']; ?></p>
+            <p><b>Category: </b><?php echo $vehicle_data['category']; ?></p>
+            <p><b>Mileage: </b><?php echo $vehicle_data['mileage']; ?>km per litre</p>
+            <p><b>Price: </b><?php echo $vehicle_data['price'] ?></p>
+            <p <?php echo $vehicle_data['availability'] ? 'class=av' : 'class=notav'; ?>><b><?php echo $vehicle_data['availability'] ? 'Available' : 'Not Available'; ?></b></p><br>
             <p> <?php echo $vehicle_data['description']; ?></p>
-            <p>Availability: <?php echo $vehicle_data['availability'] ? 'Available' : 'Not Available'; ?></p>
         </div>
         <div class="detail-right">
             <img src="../vehicleImages/<?php echo $vehicle_data['image_filename']; ?>" alt="Vehicle Image" style="width: 500px;">
-            <a href="admin-editVehicles.php?id=<?php echo $row['vehicle_id']; ?>">Edit</a>
-            <!-- Delete button -->
-            <a href="admin-deleteVehicle.php?id=<?php echo $row['vehicle_id']; ?>" onclick="return confirm('Are you sure you want to delete this vehicle?');">Delete</a>
+            
         </div>
     </div>
     

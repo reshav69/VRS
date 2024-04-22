@@ -9,7 +9,7 @@
     $availability = trim($_POST["availability"]);
     include '../connection.php';
 
-    $sql = "UPDATE Vehicles SET name='$name', category='$type', mileage='$mileage', price='$price',description='$description', availability='$availability' WHERE vehicle_id=$id";
+    $sql = "UPDATE Vehicles SET name='$name', category='$type', mileage='$mileage', price='$price', availability='$availability',description='$description' WHERE vehicle_id=$id";
 
     if (mysqli_query($conn,$sql)) {
     	echo "the record was updated";

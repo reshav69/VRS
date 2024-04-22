@@ -1,3 +1,6 @@
+.tab-veh{
+    margin: 8px;
+}
 table {
     border-collapse: collapse;
     width: 100%;
@@ -5,6 +8,7 @@ table {
 
 th, td {
     border: 1px solid #ddd;
+/*    border: none;*/
     padding: 8px;
     text-align: left;
 }
@@ -14,8 +18,10 @@ th {
 }
 td div{
     overflow: hidden;
-    max-height: 60px;
-    max-width:20em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-height: 4em;
+    max-width:15em;
 }
 table a{
     text-decoration: none;

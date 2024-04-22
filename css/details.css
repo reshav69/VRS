@@ -32,10 +32,7 @@
     text-align: center;
     margin: 5%;
 } */
-.msg{
-    color:Green;
-    font-size:14pt;
-}
+
 @media (max-width: 768px) {
     .detail-container {
         display: block;

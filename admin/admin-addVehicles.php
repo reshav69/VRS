@@ -7,10 +7,10 @@ if (!isset($_SESSION["admin_logged_in"]) && $_SESSION["admin_logged_in"] !== tru
     header("location: admin-login.php");
     exit();
 }
-$aid = $_SESSION['ad-username'];
+$aid = $_SESSION['admin_id'];
 //variables
-$name =$model= $type = $mileage = $price = $vimage = $desc="";
-$name_err = $model_err = $type_err = $mileage_err = $price_err = $vimage_err = "";
+$name =$model= $type = $mileage = $price = $vimage = $desc=$success="";
+$name_err = $model_err = $type_err = $mileage_err = $price_err = $vimage_err =$err= "";
 $errcnt = 0;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -98,9 +98,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             //execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
-                echo "Added successfully";
+                $success= "Added successfully";
             } else {
-                echo "Oops! Something went wrong. Please try again later.";
+                $err= "Oops! Something went wrong. Please try again later.";
             }
 
             mysqli_stmt_close($stmt);
@@ -118,6 +118,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <?php include 'admin-nav.php'; ?>
+    <?php echo '<p style="text-align:center;"class="error">'. $err .'</p>'; ?>
+    <?php echo '<p style="text-align:center;"class="msg">'. $success .'</p>'; ?>
     <div class="form-container">
         <form action="admin-addVehicles.php" method="post" enctype="multipart/form-data">
             <div class="inp-grp">
@@ -168,7 +170,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <div class="inp-grp">
-                <input type="submit" name="btnAdd" value="Add">
+                <button type="submit" name="btnAdd" class="loginbtn">Add</button>
             </div>
         </form>
     </div>

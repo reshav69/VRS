@@ -1,5 +1,4 @@
 <?php
-include 'user/home.php';
 //@NabiKAZ
 //https://gist.github.com/NabiKAZ/91f716faa89aab747317fe09db694be8
 //For show advanced list of files and directories with sort, date, size, icon type,...,

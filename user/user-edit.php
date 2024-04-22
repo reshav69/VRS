@@ -11,10 +11,10 @@ if (!isset($_SESSION["user_logged_in"]) && $_SESSION["user_logged_in"] !== true)
 include '../connection.php';
 include '../functions/validate.php';
 
-// Initialize variablesCar
-$name = $username = $address = $password = $contact = $email = '';
+// Initialize variables
+$name = $username = $address = $password = $contact = $email =$message= '';
 $newname = $newusername = $newaddress = $newpassword = $newcontact = $newemail = '';
-$name_err =$user_err=$address_err = $pass_err = $ph_err = $email_err = '';
+$name_err =$username_err=$address_err = $pass_err = $ph_err = $email_err = '';
 $errcnt = 0;
 
 // Check if user ID is provided in the sessuin
@@ -92,11 +92,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Validate contact
     $newcontact=trim($_POST["newcontact"]);
     if (empty($newcontact)) {
-        $contact_err = "Please enter your contact number.";
+        $ph_err = "Please enter your contact number.";
         $errcnt++;
     } else {
         if (validate_data($newcontact, '/^9[0-9]{9}$/' ) == false) {
-          $contact_err="phone number invalid";
+          $ph_err="phone number invalid";
           $errcnt++;
       }
     }
@@ -112,19 +112,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
             // Validate password
-    if (empty(trim($_POST["newpassword"]))) {
-        $password_err = "Please enter a password.";
+    $newpassword = trim($_POST["newpassword"]);
+    if (!empty($newpassword) && strlen(trim($_POST["newpassword"])) < 6) {
+        $pass_err = "Password must have at least 6 characters.";
         $errcnt++;
-    } elseif (strlen(trim($_POST["newpassword"])) < 6) {
-        $password_err = "Password must have at least 6 characters.";
     } else {
         $newpassword = trim($_POST["newpassword"]);
     }
 
     if ($errcnt==0) {
+        echo "works";
         //update query
         $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
-         $sql = "UPDATE Users SET username = '$newusername', email = '$newemail', password = '$hashed_password', contact = '$newcontact', email = '$newemail', address = '$address' WHERE user_id = '$userid'";
+         $sql = "UPDATE Users SET name = '$newname',username = '$newusername', email = '$newemail', password = '$hashed_password', contact = '$newcontact', address = '$address' WHERE user_id = '$userid'";
          if (mysqli_query($conn, $sql)) {
             $message = 'Profile edited successfully';
 
@@ -149,41 +149,42 @@ mysqli_close($conn);
 <body>
     <?php include 'user-nav.php' ?>
     <div class="form-container">
-        <h2>Edit user</h2><hr>
+        <h2>Edit user</h2>
+        <span style="color: green"><?php echo "$message"; ?></span>
+        <hr>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" >
-            <span style="color: green"><?php echo "$message"; ?></span>
             <div class="inp-grp">
                 <label for="newname">Name: </label>
-                <input type="text" name="newname" value="<?php echo isset($name) ? $name : ''; ?>">
                 <span class="inp-err"><?php echo $name_err; ?></span>
+                <input type="text" name="newname" value="<?php echo isset($name) ? $name : ''; ?>">
             </div>
 
 
             <div class="inp-grp">
                 <label for="newusername">username: </label>
+                <span class="inp-err"><?php echo $username_err; ?></span>
                 <input type="text" name="newusername" value="<?php echo isset($username) ? $username : ''; ?>">
-                <span class="inp-err"><?php echo $user_err; ?></span>
             </div>
 
             <div class="inp-grp">
                 <label for="newaddress">address: </label>
-                <input type="text" name="newaddress" value="<?php echo isset($address) ? $address : ''; ?>">
                 <span class="inp-err"><?php echo $address_err; ?></span>
+                <input type="text" name="newaddress" value="<?php echo isset($address) ? $address : ''; ?>">
             </div>
             <div class="inp-grp">
                 <label for="newemail">email: </label>
-                <input type="text" name="newemail" value="<?php echo isset($email) ? $email : ''; ?>">
                 <span class="inp-err"><?php echo $email_err; ?></span>
+                <input type="text" name="newemail" value="<?php echo isset($email) ? $email : ''; ?>">
             </div>
             <div class="inp-grp">
                 <label for="newcontact">contact: </label>
-                <input type="number" name="newcontact" value="<?php echo isset($contact) ? $contact : ''; ?>">
                 <span class="inp-err"><?php echo $ph_err; ?></span>
+                <input type="number" name="newcontact" value="<?php echo isset($contact) ? $contact : ''; ?>">
             </div>
             <div class="inp-grp">
                 <label for="newpassword">password: </label>
-                <input type="password" name="newpassword" >
                 <span class="inp-err"><?php echo $pass_err; ?></span>
+                <input type="password" name="newpassword" >
             </div>
 
             <div class="inp-grp">

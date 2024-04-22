@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS Admins (
 );
 
 CREATE TABLE IF NOT EXISTS Vehicles (
-    vehicle_id INT AUTO_INCREMENT PRIMARY KEY,
+    vehicle_id INT AUTO_INCREMENT PRIMARY KEY,aid INT,
     name VARCHAR(100) NOT NULL,
     model VARCHAR(100) NOT NULL,
     category VARCHAR(50) NOT NULL,
@@ -43,7 +43,8 @@ CREATE TABLE IF NOT EXISTS Vehicles (
     price DECIMAL(10, 2) NOT NULL,
     description TEXT DEFAULT NULL,
     availability BOOLEAN DEFAULT TRUE,
-    image_filename VARCHAR(255)
+    image_filename VARCHAR(255),
+    FOREIGN KEY (aid) REFERENCES Admins(admin_id)
 );
 
 CREATE TABLE IF NOT EXISTS Users (
@@ -67,7 +68,6 @@ CREATE TABLE IF NOT EXISTS Rent (
     FOREIGN KEY (user_id) REFERENCES Users(user_id),#cascade on delete
     FOREIGN KEY (vehicle_id) REFERENCES Vehicles(vehicle_id)
 );
-#add new contacts table
 ";
 
 // Execute
@@ -78,10 +78,5 @@ if ($conn->multi_query($sql) === TRUE) {
 }
 
 $conn->close();
-// create trigger in database
-// if rent.status =approved
-// vehicle.availability  = 0 
 
-//else
-//vehicle.availability = 1
 ?>

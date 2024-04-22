@@ -76,6 +76,10 @@ a {
 .error,.inp-err{
   color: red;
 }
+.msg{
+    color:Green;
+    font-size:14pt;
+}
 
 @media (max-width: 768px) {
     .container {

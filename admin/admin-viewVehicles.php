@@ -25,6 +25,7 @@ $result = mysqli_query($conn, $sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Vehicles</title>
     <link rel="stylesheet" href="../css/tables.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../css/normalize.css"> -->
 
 </head>
 <body>
@@ -51,7 +52,7 @@ $result = mysqli_query($conn, $sql);
                 <td><?php echo $row['mileage']; ?></td>
                 <td><?php echo $row['price']; ?></td>
                 <td><div><?php echo $row['description']; ?></div></td>
-                <td><?php echo $row['availability'] ? 'Available' : 'Not Available'; ?></td>
+                <td <?php echo $row['availability'] ? 'class=av' : 'class=notav'; ?>><?php echo $row['availability'] ? 'Available' : 'Not Available'; ?></td>
                 <td><img src="../vehicleImages/<?php echo $row['image_filename']; ?>" alt="Vehicle Image" style="max-width: 100px;"></td>
                 <td>
                     <!-- Edit button -->
