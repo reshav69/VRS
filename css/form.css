@@ -44,6 +44,10 @@ body{
   outline: none;
 }
 
+input[type="file"]::file-selector-button {
+  display: none;
+}
+
 /* Overwrite default styles of hr */
 hr {
   border: 1px solid #f1f1f1;
@@ -82,13 +86,14 @@ a {
 }
 
 @media (max-width: 768px) {
-    .container {
-        padding: 5px;
-        width: 60%;
-        border-radius: 2px;
-    }
+  .form-container {
+    width: 100%;
+    border-radius: 2px;
+  }
+}
 
-    input {
-        height: 25px;
-    }
+@media (max-width: 1064px) {
+  .form-container {
+    width: 60%;
+  }
 }

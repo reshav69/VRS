@@ -33,7 +33,9 @@ mysqli_close($conn);
             <div class="vehicle-container">
                 <div class="box">
                     <div class="img-container">
+                    <a href="user-vehicle.php?id=<?php echo $vehicle['vehicle_id']; ?>">
                         <img src="../vehicleImages/<?php echo $vehicle['image_filename']?>" alt="vehicleimage">
+                    </a>
                     </div>
                     <div class="model-info">
                         <li>model:<?php echo $vehicle['model']; ?> </li>
