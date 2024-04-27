@@ -95,8 +95,6 @@ if ($errcnt == 0) {
 
             // execute
             if (mysqli_stmt_execute($stmt)) {
-            	echo "User registered redirecting ...";
-            	sleep(3);
                 header("location: ./user-login.php");
             } else {
                 echo "Oops! Something went wrong. Please try again later.";
