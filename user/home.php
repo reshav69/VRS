@@ -42,9 +42,9 @@ mysqli_close($conn);
                 etdolore magna aliqua.
             </p>
             <?php if (isset($_SESSION["user_logged_in"]) && $_SESSION["user_logged_in"] === true) : ?>
-            <button class="buttons">View Vehicles</button>
+            <button class="buttons" onClick="btnView()">View Vehicles</button>
             <?php else : ?>
-                <button class="buttons">Register Now</button>
+                <button class="buttons" onClick="btnRegister()">Register Now</button>
             <?php endif; ?>
         </div>
     </div>
@@ -81,6 +81,7 @@ mysqli_close($conn);
     <!--footer-->
     <?php include 'footer.php' ?>
     
+    <script type="text/javascript" src="../js/user-redirect.js"></script>
 </body>
 
 </html>
