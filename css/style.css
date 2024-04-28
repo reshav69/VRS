@@ -180,6 +180,11 @@ footer {
     color: #27bcda;
 }
 
+.icon{
+    height: 15px;
+    filter: invert();
+}
+
 @media (max-width:768px) {
     .footer-menu ul {
         display: flex;
