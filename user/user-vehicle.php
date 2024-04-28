@@ -153,11 +153,10 @@ if (isset($_POST['btnRent'])) {
     <?php include 'footer.php' ?>
 
     <script>
-        // Get today's date
-var today = new Date().toISOString().split('T')[0];
-
-// Set the minimum date for date input fields
-document.getElementById("rentDate").min = today;
+        //today's date
+        var today = new Date().toISOString().split('T')[0];
+        //minimum date as today
+        document.getElementById("rentDate").min = today;
     </script>
 </body>
 </html>
