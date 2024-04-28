@@ -1,7 +1,2 @@
 # Ignore all image files
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.bmp
-*.svg
+/vehicleImages/
