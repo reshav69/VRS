@@ -7,11 +7,11 @@
         </div>
         <div class="footer-content-right">
             <h3>Contact us</h3>
-            <li><a href="contact-us.html"><i class="fa-solid fa-location-dot"></i>&ensp; Kathmandu, Nepal</a></li>
-            <li><a href="index.html"><i class="fa-solid fa-globe"></i>&ensp; Website</a></li>
-            <li><i class="fa-solid fa-phone"></i>&ensp; 9841111111</li>
-            <li><i class="fa-regular fa-envelope"></i>&ensp; vrs@pmc.com</li>
-            <li><i class="fa-brands fa-facebook"></i>&ensp; facebook</li>
+            <li><img src="../images/location.webp" class="icon">&ensp; Kathmandu, Nepal</a></li>
+            <li><a href="../index.php"><img src="../images/website.webp" class="icon">&ensp; Website</a></li>
+            <li><img src="../images/phone.webp" class="icon">&ensp; 9841111111</li>
+            <li><img src="../images/mail.webp" class="icon">&ensp; vrs@pmc.com</li>
+            <li><img src="../images/facebook.png" class="icon">&ensp; facebook</li>
         </div>
     </div>
     <div class="footer-bottom">
@@ -19,7 +19,7 @@
         <div class="footer-menu">
             <ul class="f-menu">
                 <li><a href="home.php">Home</a></li>
-                <li><a href="../about.php">About</a></li>
+                <li><a href="search.php">Search</a></li>
                 <li><a href="user-viewVehicles.php">Find</a></li>
             </ul>
         </div>

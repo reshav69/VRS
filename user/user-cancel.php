@@ -23,8 +23,9 @@ if (empty($vehicleId)){
 }
 //check if vehicle exists
 else{
-    $sql = "Delete FROM Rent where vehicle_id = '$vehicleId' AND user_id= '$uid'";
-    $result = mysqli_query($conn,$sql);
+    $sql = "UPDATE Vehicles SET availability = 1 WHERE vehicle_id = '$vehicleId' ;
+    DELETE FROM Rent where vehicle_id = '$vehicleId' AND user_id= '$uid'";
+    $result = mysqli_multi_query($conn,$sql);
     if (($result) ) {
         echo "the request was cancelled";
         header('location: user-dashboard.php');

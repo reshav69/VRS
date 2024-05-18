@@ -1,0 +1,52 @@
+*{
+    margin: auto;
+    overflow-y: visible;
+}
+form{
+    display: inline;
+}
+
+#icon{
+    height: 15px;
+    margin-right: 5%;
+}
+
+input, select {
+    border: none;
+    width: 100%;
+    background-color: white;
+}
+input:focus{
+    outline: none;
+}
+
+select{
+    text-align: center;
+}
+
+.searchbox{
+    background-color: white;
+    height: 2rem;
+    width: 20%;
+    display: inline-flex;
+    padding: 7px;
+}
+
+button{
+    background-color: rgb(1, 139, 139);
+    color: white;
+    border: none;
+    cursor: pointer;
+    height: 2rem;
+    width: 8%;
+    opacity: 0.9;
+}
+
+@media (max-width : 500px){
+    .searchbox{
+        width: 80%;
+    }
+    button{
+        width: 15%;
+    }
+}

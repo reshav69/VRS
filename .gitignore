@@ -1,2 +1,6 @@
 # Ignore all image files
+<<<<<<< HEAD
 /vehicleImages/*
+=======
+/vehicleImages/*
+>>>>>>> master

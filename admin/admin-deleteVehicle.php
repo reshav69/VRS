@@ -16,17 +16,23 @@ if (empty($vehicleId)){
 }
 //check if vehicle exists
 else{
-	include "../connection.php";
-    $sql = "Delete FROM Vehicles where vehicle_id = '$vehicleId'";
-    $result = mysqli_query($conn,$sql);
-    if ($result) {
-        echo "The vehicle was DELETED!!!!";
-    }else{
-        echo "The requested vehicle was not deleted";
-        // header("location: error.php");
-    }
-}
+    try {
+            
+    	include "../connection.php";
+        $sql = "DELETE FROM Vehicles where vehicle_id = '$vehicleId'";
+        $result = mysqli_query($conn,$sql);
+        if ($result) {
+            echo "The vehicle was DELETED!!!!";
+        }else{
+            echo "The requested vehicle was not deleted";
+            // header("location: error.php");
+        }
+    } catch (Exception $e) {
+        echo "<script>alert('The vehicle cannot be deleted');document.location='admin-viewVehicles.php'</script>";
 
+    }
+
+}
 
 ?>
 <!DOCTYPE html>
