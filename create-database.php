@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS Rent (
     vehicle_id INT,
     request_date DATE,
     status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
-    FOREIGN KEY (user_id) REFERENCES Users(user_id),#cascade on delete
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
     FOREIGN KEY (vehicle_id) REFERENCES Vehicles(vehicle_id)
 );
 ";

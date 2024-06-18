@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         )";
 
         if (mysqli_multi_query($conn, $sql)) {
-            echo "Rent request approved successfully.";
+            echo "<script>alert('The request was approved');document.location='admin-rentRequests.php'</script>";
         } else {
             echo "Error approving rent request: " . mysqli_error($conn);
         }
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt = mysqli_prepare($conn, $sql)) {
             mysqli_stmt_bind_param($stmt, "i", $request_id);
             if (mysqli_stmt_execute($stmt)) {
-                echo "Rent request rejected successfully.";
+                echo "<script>alert('The request was rejected');document.location='admin-rentRequests.php'</script>";
             } else {
                 echo "Error rejecting rent request.";
             }
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         )";
 
         if (mysqli_multi_query($conn, $fsql)) {
-            echo "The rent is now completed";
+            echo "<script>alert('The request is now complete');document.location='admin-rentRequests.php'</script>";
         } else {
             echo "Error approving rent request: ";
         }

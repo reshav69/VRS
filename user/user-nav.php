@@ -17,6 +17,7 @@
 
 
             <li><a href="user-viewVehicles.php">Find Vehicles</a></li>
+            <!-- check loggedin -->
             <?php if (isset($_SESSION["user_logged_in"]) && $_SESSION["user_logged_in"] === true) : ?>
             <li class="categories">
                 <a href="user-dashboard.php">| <?php echo $_SESSION['user-username']?> |</a>
