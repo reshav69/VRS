@@ -69,9 +69,16 @@ mysqli_close($conn);
 				<td><?php echo $row['rent_days']; ?> days</td>
 				<td><?php echo $row['location']; ?></td>
 				<td><?php echo $row['status']; ?></td>
+				<?php if ($row['status'] != "approved") {?>
 				<td>
-                    <a class="red" href="user-cancel.php?id=<?php echo $row['vehicle_id']; ?>" onclick="return confirm('Are you sure you want to cancel this request?');"class="buttons">Cancel/Delete</a>
+                    <a class="red" 
+                    href="user-cancel.php?id=<?php echo $row['vehicle_id']; ?>" 
+                    onclick="return confirm('Are you sure you want to cancel this request?');"class="buttons"
+                    >Cancel/Delete
+
+                	</a>
                 </td>
+            	<?php }?>
 			</tr>
 		<?php endwhile; ?>
 	</table>

@@ -52,7 +52,7 @@ else{
             <p><b>Mileage: </b><?php echo $vehicle_data['mileage']; ?>km per litre</p>
             <p><b>Price: </b><?php echo $vehicle_data['price'] ?></p>
             <p <?php echo $vehicle_data['availability'] ? 'class=av' : 'class=notav'; ?>><b><?php echo $vehicle_data['availability'] ? 'Available' : 'Not Available'; ?></b></p><br>
-            <p> <?php echo $vehicle_data['description']; ?></p>
+            <p id="desc"> <?php echo $vehicle_data['description']; ?></p>
         </div>
         <div class="detail-right">
             <img src="../vehicleImages/<?php echo $vehicle_data['image_filename']; ?>" alt="Vehicle Image" style="width: 500px;">
@@ -60,7 +60,27 @@ else{
         </div>
     </div>
     
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var descElement = document.getElementById('desc');
+            var description = descElement.textContent; 
+            
+            var sentences = description.split('.');
+
+            var ul = document.createElement('ul');
+
+            sentences.forEach(function(sentence) {
+                var trimmedSentence = sentence.trim();
+                if (trimmedSentence) { 
+                    var li = document.createElement('li');
+                    li.textContent = trimmedSentence + '.'; 
+                    ul.appendChild(li);
+                }
+            });
+            descElement.innerHTML = '';
+            descElement.appendChild(ul);
+        });
+    </script>
 </body>
 </html>
 

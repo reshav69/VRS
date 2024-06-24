@@ -22,9 +22,9 @@
             <li class="categories">
                 <a href="user-dashboard.php">| <?php echo $_SESSION['user-username']?> |</a>
                 <ul class="dropdown">
-                    <li><a href="user-edit.php">Edit Profile? </a></li>
+                    <!-- <li><a href="user-edit.php">Edit Profile? </a></li> -->
                     <li><a href="user-viewVehicles.php">Find Vehicles</a></li>
-                    <li><a href="#">Dropdown 3</a></li>
+                    <li><a href="search.php">Search</a></li>
                     <hr>
                     <li><a href="../functions/logout.php">logout</a></li>
                 </ul>

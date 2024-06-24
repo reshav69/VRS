@@ -38,13 +38,6 @@ if ($presult = mysqli_query($conn, $psql)) {
     mysqli_free_result($presult);
 }
 
-// Count the number of approved vehicles
-$asql = "SELECT COUNT(*) FROM Rent WHERE status = 'approved'";
-if ($aresult = mysqli_query($conn, $asql)) {
-    $arow = mysqli_fetch_row($aresult);
-    $anum = $arow[0]; // Number of approved vehicles
-    mysqli_free_result($aresult);
-}
 
 // Close database connection
 mysqli_close($conn);
@@ -78,7 +71,6 @@ mysqli_close($conn);
 		<br>
 		<p class="dp">Number of Vehicles: <?php echo "$vnum"; ?></p>
 		<p class="dp">Pending Requests: <?php echo "$pnum"; ?></p>
-		<p class="dp">Approved Requests: <?php echo $vnum ?></p>
 	</div>
 	<script type="text/javascript" src="../js/clock.js"></script>
 </body>

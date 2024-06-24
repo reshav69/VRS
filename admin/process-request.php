@@ -35,17 +35,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $request_id = $_POST['request_id'];
 
         // Update reject status
-        $sql = "UPDATE Rent SET status = 'rejected' WHERE request_id = ?";
-        if ($stmt = mysqli_prepare($conn, $sql)) {
-            mysqli_stmt_bind_param($stmt, "i", $request_id);
-            if (mysqli_stmt_execute($stmt)) {
-                echo "<script>alert('The request was rejected');document.location='admin-rentRequests.php'</script>";
-            } else {
-                echo "Error rejecting rent request.";
-            }
-            mysqli_stmt_close($stmt);
+        $fsql = "UPDATE Rent SET status='rejected' WHERE request_id = '$request_id';
+        UPDATE Vehicles SET availability = 1 WHERE vehicle_id = (
+            SELECT vehicle_id 
+            FROM Rent 
+            WHERE request_id = '$request_id'
+        )";
+        if (mysqli_multi_query($conn, $fsql)) {
+            echo "<script>alert('The request is rejected');document.location='admin-rentRequests.php'</script>";
         } else {
-            echo "Oops! Something went wrong. Please try again later.";
+            echo "Error approving rent request: ";
         }
     }
 

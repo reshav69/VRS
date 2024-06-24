@@ -64,7 +64,7 @@ if (isset($_POST['btnRent'])) {
         $errLoc = "Enter the pickup location";
         $errcnt++;
     } else {
-        if (validate_data($rentloc, '/^[a-zA-Z0-9]+$/' ) == false) {
+        if (validate_data($rentloc, '/^[a-zA-Z0-9 ]+$/' ) == false) {
           $errLoc="Location should not contain special characters";
           $errcnt++;
       }
@@ -122,7 +122,9 @@ if (isset($_POST['btnRent'])) {
             <p><b>Mileage:</b> <?php echo $vehicle_data['mileage']; ?> km per litre</p>
             <p><b>Price:</b> <?php echo $vehicle_data['price'] ?> per day</p>
             <p <?php echo $vehicle_data['availability'] ? 'class=av' : 'class=notav'; ?>><b><?php echo $vehicle_data['availability'] ? 'Available' : 'Not Available'; ?></b></p><br>
-            <p> <?php echo $vehicle_data['description']; ?></p>
+            <p id="desc"> <?php echo $vehicle_data['description']; ?></p>
+
+            
         </div>
         <div class="detail-right">
             <span class="error"><?php echo $rentmsg; ?></span>
@@ -153,6 +155,26 @@ if (isset($_POST['btnRent'])) {
     <?php include 'footer.php' ?>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var descElement = document.getElementById('desc');
+            var description = descElement.innerText; 
+            
+            var sentences = description.split('.');
+
+            var ul = document.createElement('ul');
+
+            sentences.forEach(function(sentence) {
+                var trimmedSentence = sentence.trim();
+                if (trimmedSentence) { 
+                    var li = document.createElement('li');
+                    li.textContent = trimmedSentence + '.'; 
+                    ul.appendChild(li);
+                }
+            });
+            descElement.innerHTML = '';
+            descElement.appendChild(ul);
+        });
+
         //today's date
         var today = new Date().toISOString().split('T')[0];
         //minimum date as today

@@ -12,7 +12,7 @@
     $sql = "UPDATE Vehicles SET name='$name', category='$type', mileage='$mileage', price='$price', availability='$availability',description='$description' WHERE vehicle_id=$id";
 
     if (mysqli_query($conn,$sql)) {
-    	echo "the record was updated";
+    	echo "<script>alert('The vehicle was updated');document.location='admin-viewVehicles.php'</script>";
     }
     else{
     	echo "some error occured";
