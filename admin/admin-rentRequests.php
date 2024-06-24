@@ -46,16 +46,20 @@ mysqli_close($conn);
             <th>Actions</th>
         </tr>
         <?php while ($row = mysqli_fetch_assoc($result)) : ?>
-            <?php if ($row['status'] == "finished") {
-                $fin=true;
-            } ?>
+            <?php if ($row['status'] == "approved") {
+                        $col="green";
+                    }
+                elseif($row['status'] == "rejected")
+                        $col="red";
+
+            ?>
             <tr>
                 <td><?php echo $row['request_id']; ?></td>
                 <td><?php echo $row['username']; ?></td>
                 <td><a href="admin-vehicle.php?id=<?php echo $row['vehicle_id']; ?>"><?php echo $row['name']; ?></a></td>
 
                 <td><?php echo $row['request_date']; ?></td>
-                <td><?php echo $row['status']; ?></td>
+                <td style="color: <?php echo $col; ?>"><?php echo $row['status']; ?></td>
                 <td><?php echo $row['contact']; ?></td>
                 <td><?php echo $row['rent_date']; ?></td>
                 <td><?php echo $row['rent_days']; ?> Days</td>
@@ -63,7 +67,7 @@ mysqli_close($conn);
                 <form action="process-request.php" method="post">
                     <input type="hidden" name="request_id" value="<?php echo $row['request_id']; ?>">
                     <button type="submit" name="approve" <?php if ($row['status'] == "finished") echo "disabled";?>>Approve</button>
-                    <button type="submit" name="reject" <?php if ($row['status'] == "finished") echo "disabled";?>>Reject</button>
+                    <button type="submit" name="reject" <?php if ($row['status'] == "finished" ) echo "disabled";?>>Reject</button>
                     <button type="submit" name="finish">Complete Rent</button>
                 </form>
             </td>

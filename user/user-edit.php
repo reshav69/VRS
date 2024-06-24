@@ -121,7 +121,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if ($errcnt==0) {
-        echo "works";
         //update query
         $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
          $sql = "UPDATE Users SET name = '$newname',username = '$newusername', email = '$newemail', password = '$hashed_password', contact = '$newcontact', address = '$address' WHERE user_id = '$userid'";
